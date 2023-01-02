@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Transparent.QuickTooltips" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="QuickTooltips">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="QuickTooltips.Card" parent="QuickTooltips">
+        <item name="android:layout_width">@dimen/quick_tooltips_card_width</item>
+        <item name="cardCornerRadius">@dimen/quick_tooltips_card_corner</item>
+        <item name="cardElevation">@dimen/quick_tooltips_card_elevation</item>
+    </style>
+
+    <style name="QuickTooltips.Linear" parent="QuickTooltips">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="QuickTooltips.Linear.Horizontal" parent="QuickTooltips">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="QuickTooltips.Text" parent="QuickTooltips">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/quick_tooltips_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/quick_tooltips_safe_area</item>
+        <item name="android:layout_marginStart">@dimen/quick_tooltips_safe_area</item>
+        <item name="android:layout_marginEnd">@dimen/quick_tooltips_safe_area</item>
+        <item name="android:textColor">@color/color_quick_tooltips_text</item>
+    </style>
+
+    <style name="QuickTooltips.Text.Title" parent="QuickTooltips.Text">
+        <item name="android:textSize">@dimen/quick_tooltips_text_title</item>
+        <item name="android:textColor">@color/color_quick_tooltips_title</item>
+    </style>
+
+    <style name="QuickTooltips.Button" parent="QuickTooltips">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:paddingStart">@dimen/quick_tooltips_button_space_side</item>
+        <item name="android:paddingEnd">@dimen/quick_tooltips_button_space_side</item>
+        <item name="android:paddingTop">@dimen/quick_tooltips_button_space_vertical</item>
+        <item name="android:paddingBottom">@dimen/quick_tooltips_button_space_vertical</item>
+        <item name="android:textSize">@dimen/quick_tooltips_button_text_size</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:textColor">@color/color_quick_tooltips_button</item>
+    </style>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_quick_tooltips_overlay">#CC0A0A0A</color>
+    <color name="color_quick_tooltips_button_close">#991E1E1E</color>
+    <color name="color_quick_tooltips_card">#FFFFFF</color>
+    <color name="color_quick_tooltips_button">#2196F3</color>
+    <color name="color_quick_tooltips_text">#5A5A5A</color>
+    <color name="color_quick_tooltips_title">#000000</color>
+
+</resources>

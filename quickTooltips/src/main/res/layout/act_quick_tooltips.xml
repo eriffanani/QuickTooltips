@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.erif.quicktooltips.QuickTooltipsTargetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/act_quick_tooltips_targetViewLayout"
+    tools:context=".ActQuickTooltips">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/act_quick_tooltips_card"
+        style="@style/QuickTooltips.Card"
+        android:alpha="0"
+        android:theme="@style/Theme.MaterialComponents.Light">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                style="@style/QuickTooltips.Linear"
+                android:layout_width="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/illustration_parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/QuickTooltips.Text.Title"
+                    android:text="Google Meet, now in Gmail"/>
+
+                <TextView
+                    style="@style/QuickTooltips.Text"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Ini adalah deskripsi Ini adalah deskripsi Ini adalah deskripsi"/>
+
+                <LinearLayout
+                    style="@style/QuickTooltips.Linear.Horizontal"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="@dimen/quick_tooltips_safe_area"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/act_quick_tooltips_btnLearnMore"
+                        style="@style/QuickTooltips.Button"
+                        android:text="Learn More"
+                        android:layout_marginEnd="15dp"/>
+
+                    <TextView
+                        android:id="@+id/act_quick_tooltips_btnGotIt"
+                        style="@style/QuickTooltips.Button"
+                        android:text="Got it" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                style="@style/QuickTooltips"
+                android:padding="@dimen/quick_tooltips_button_space_vertical"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="@dimen/quick_tooltips_button_space_vertical"
+                android:layout_marginEnd="@dimen/quick_tooltips_button_space_vertical"
+                android:background="@drawable/bg_quick_tooltips_close">
+
+                <ImageView
+                    android:layout_width="@dimen/quick_tooltips_icon_close_size"
+                    android:layout_height="@dimen/quick_tooltips_icon_close_size"
+                    android:src="@drawable/ic_quick_tooltips_close"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/act_quick_tooltips_img_triangle"
+        android:layout_width="@dimen/quick_tooltips_icon_triangle_size"
+        android:layout_height="@dimen/quick_tooltips_icon_triangle_size"
+        android:src="@drawable/ic_triangle"
+        tools:ignore="ContentDescription"
+        android:layout_marginStart="100dp"
+        android:elevation="@dimen/quick_tooltips_card_elevation"
+        android:alpha="0"
+        android:layout_marginTop="@dimen/quick_tooltips_icon_triangle_margin" />
+
+</com.erif.quicktooltips.QuickTooltipsTargetLayout>
