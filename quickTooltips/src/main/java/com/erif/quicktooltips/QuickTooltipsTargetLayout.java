@@ -20,6 +20,9 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
     private Paint paint;
     private Paint paintCircle;
     private Paint paintRounded;
+    private RectF rectF;
+    private float[] cornerRadius;
+
     private int targetWidth = 0;
     private int targetHeight = 0;
 
@@ -28,12 +31,13 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
     private int targetRight = 0;
     private int targetBottom = 0;
 
-    private float corner = 0f;
     private int additional = 0;
     private ValueAnimator anim;
     private boolean isAnim = false;
 
     private float circleRadius = 0f;
+
+    private static final long ANIM_DURATION = 700L;
 
     public QuickTooltipsTargetLayout(Context context) {
         super(context);
@@ -70,7 +74,15 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
         paintRounded.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
         additional = getDimen(context, R.dimen.quick_tooltips_additional);
-        corner = getDimen(context, R.dimen.quick_tooltips_corner);
+        float corner = getDimen(context, R.dimen.quick_tooltips_corner);
+
+        rectF = new RectF();
+        cornerRadius = new float[]{
+                corner, corner, // Top Left
+                corner, corner, // Top Right
+                corner, corner, // Bottom Right
+                corner, corner, // Bottom Left
+        };
 
     }
 
@@ -116,10 +128,11 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
             canvas.drawCircle(centerX, centerY, circleRadius, paintCircle);
         if (circleRadius > 0)
             if (!isAnim)
-                playAnim();
+                playAnimCircle();
     }
 
-    private void playAnim() {
+    private void playAnimCircle() {
+        if (isAnim) anim.cancel();
         float size = Math.max(targetWidth, targetHeight);
         anim = ValueAnimator.ofFloat((size / 1.9f), (size / 1.5f));
         anim.addUpdateListener(valueAnimator -> {
@@ -128,35 +141,58 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
         });
         anim.setRepeatCount(ValueAnimator.INFINITE);
         anim.setRepeatMode(ValueAnimator.REVERSE);
-        anim.setDuration(700L);
+        anim.setDuration(ANIM_DURATION);
         anim.start();
         isAnim = true;
     }
 
     private void drawHoleRounded(Canvas canvas) {
-        RectF rectF = new RectF();
-        rectF.set(
-                targetLeft - additional,
-                targetTop - additional,
-                targetRight + additional,
-                targetBottom + additional
-        );
+        if (rectF.left == 0 && rectF.top == 0 && rectF.right == 0 && rectF.bottom == 0) {
+            rectF.set(
+                    targetLeft - additional,
+                    targetTop,
+                    targetRight + additional,
+                    targetBottom
+            );
+        }
         Path path = new Path();
-
-        float[] cornerRadius = new float[]{
-                corner, corner, // Top Left
-                corner, corner, // Top Right
-                corner, corner, // Bottom Right
-                corner, corner, // Bottom Left
-        };
-
         path.addRoundRect(rectF, cornerRadius, Path.Direction.CCW);
         if (canvas != null)
             canvas.drawPath(path, paintRounded);
+        if (rectF.left == 0 && rectF.top == 0 && rectF.right == 0 && rectF.bottom == 0) {
+
+        } else {
+            if (!isAnim)
+                playAnimRounded();
+        }
+    }
+
+    private void playAnimRounded() {
+        if (isAnim) anim.cancel();
+        anim = ValueAnimator.ofFloat(0f, getDimen(getContext(), R.dimen.quick_tooltips_card_elevation));
+        anim.addUpdateListener(valueAnimator -> {
+            float mValue = (float) valueAnimator.getAnimatedValue();
+            rectF.set(
+                    (targetLeft - additional) - mValue,
+                    targetTop - mValue,
+                    (targetRight + additional) + mValue,
+                    targetBottom + mValue
+            );
+            invalidate();
+        });
+        anim.setRepeatCount(ValueAnimator.INFINITE);
+        anim.setRepeatMode(ValueAnimator.REVERSE);
+        anim.setDuration(ANIM_DURATION);
+        anim.start();
+        isAnim = true;
     }
 
     private int getDimen(Context context, int id) {
         return context.getResources().getDimensionPixelSize(id);
+    }
+
+    private void log(String message) {
+        Log.d("QuickTooltipsLog", message);
     }
 
 }
