@@ -9,7 +9,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
@@ -21,7 +20,8 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
     private Paint paintCircle;
     private Paint paintRounded;
     private RectF rectF;
-    private float[] cornerRadius;
+    private float[] corners;
+    private float cornersRadius;
 
     private int targetWidth = 0;
     private int targetHeight = 0;
@@ -31,13 +31,15 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
     private int targetRight = 0;
     private int targetBottom = 0;
 
+    private boolean animate = false;
     private int additional = 0;
     private ValueAnimator anim;
     private boolean isAnim = false;
-
     private float circleRadius = 0f;
+    private int shape = QuickTooltips.SHAPE_CIRCLE;
 
     private static final long ANIM_DURATION = 700L;
+
 
     public QuickTooltipsTargetLayout(Context context) {
         super(context);
@@ -74,14 +76,13 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
         paintRounded.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
         additional = getDimen(context, R.dimen.quick_tooltips_additional);
-        float corner = getDimen(context, R.dimen.quick_tooltips_corner);
 
         rectF = new RectF();
-        cornerRadius = new float[]{
-                corner, corner, // Top Left
-                corner, corner, // Top Right
-                corner, corner, // Bottom Right
-                corner, corner, // Bottom Left
+        corners = new float[]{
+                cornersRadius, cornersRadius, // Top Left
+                cornersRadius, cornersRadius, // Top Right
+                cornersRadius, cornersRadius, // Bottom Right
+                cornersRadius, cornersRadius, // Bottom Left
         };
 
     }
@@ -110,11 +111,32 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
         this.targetBottom = bottom;
     }
 
+    public void setShape(int shape) {
+        this.shape = shape;
+    }
+
+    public void setCornersRadius(float cornersRadius) {
+        this.cornersRadius = cornersRadius;
+        corners = new float[]{
+                cornersRadius, cornersRadius, // Top Left
+                cornersRadius, cornersRadius, // Top Right
+                cornersRadius, cornersRadius, // Bottom Right
+                cornersRadius, cornersRadius, // Bottom Left
+        };
+    }
+
+    public void setAnimate(boolean animate) {
+        this.animate = animate;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawPaint(paint);
-        drawHoleCircle(canvas);
-        //drawHoleRounded(canvas);
+        if (shape == QuickTooltips.SHAPE_SQUARE) {
+            drawHoleSquare(canvas);
+        } else {
+            drawHoleCircle(canvas);
+        }
         super.onDraw(canvas);
     }
 
@@ -126,15 +148,14 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
             circleRadius = size / 1.5f;
         if (canvas != null)
             canvas.drawCircle(centerX, centerY, circleRadius, paintCircle);
-        if (circleRadius > 0)
-            if (!isAnim)
-                playAnimCircle();
+        if (circleRadius > 0 && animate && !isAnim)
+            playAnimCircle();
     }
 
     private void playAnimCircle() {
         if (isAnim) anim.cancel();
         float size = Math.max(targetWidth, targetHeight);
-        anim = ValueAnimator.ofFloat((size / 1.9f), (size / 1.5f));
+        anim = ValueAnimator.ofFloat((size / 1.7f), (size / 1.5f));
         anim.addUpdateListener(valueAnimator -> {
             circleRadius = (float) valueAnimator.getAnimatedValue();
             invalidate();
@@ -146,7 +167,7 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
         isAnim = true;
     }
 
-    private void drawHoleRounded(Canvas canvas) {
+    private void drawHoleSquare(Canvas canvas) {
         if (rectF.left == 0 && rectF.top == 0 && rectF.right == 0 && rectF.bottom == 0) {
             rectF.set(
                     targetLeft - additional,
@@ -156,20 +177,18 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
             );
         }
         Path path = new Path();
-        path.addRoundRect(rectF, cornerRadius, Path.Direction.CCW);
+        path.addRoundRect(rectF, corners, Path.Direction.CCW);
         if (canvas != null)
             canvas.drawPath(path, paintRounded);
-        if (rectF.left == 0 && rectF.top == 0 && rectF.right == 0 && rectF.bottom == 0) {
-
-        } else {
-            if (!isAnim)
-                playAnimRounded();
-        }
+        boolean notFound = rectF.left == 0 && rectF.top == 0 && rectF.right == 0 && rectF.bottom == 0;
+        if (!notFound && animate && !isAnim)
+            playAnimSquare();
     }
 
-    private void playAnimRounded() {
+    private void playAnimSquare() {
         if (isAnim) anim.cancel();
-        anim = ValueAnimator.ofFloat(0f, getDimen(getContext(), R.dimen.quick_tooltips_card_elevation));
+        float flexValue = getDimen(getContext(), R.dimen.quick_tooltips_additional);
+        anim = ValueAnimator.ofFloat(0f, (flexValue / 2f));
         anim.addUpdateListener(valueAnimator -> {
             float mValue = (float) valueAnimator.getAnimatedValue();
             rectF.set(
@@ -191,8 +210,8 @@ public class QuickTooltipsTargetLayout extends RelativeLayout {
         return context.getResources().getDimensionPixelSize(id);
     }
 
-    private void log(String message) {
-        Log.d("QuickTooltipsLog", message);
-    }
+    /*
+    private void log(String message) {Log.d("QuickTooltipsLog", message);}
+    */
 
 }

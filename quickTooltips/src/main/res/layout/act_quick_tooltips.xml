@@ -10,7 +10,6 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/act_quick_tooltips_card"
         style="@style/QuickTooltips.Card"
-        android:alpha="0"
         android:theme="@style/Theme.MaterialComponents.Light">
 
         <FrameLayout
@@ -22,20 +21,20 @@
                 android:layout_width="match_parent">
 
                 <ImageView
+                    android:id="@+id/act_quick_tooltips_imgView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@mipmap/illustration_parent"
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    style="@style/QuickTooltips.Text.Title"
-                    android:text="Google Meet, now in Gmail"/>
+                    android:id="@+id/act_quick_tooltips_txtTitle"
+                    style="@style/QuickTooltips.Text.Title"/>
 
                 <TextView
+                    android:id="@+id/act_quick_tooltips_txtDesc"
                     style="@style/QuickTooltips.Text"
-                    android:lineSpacingExtra="4dp"
-                    android:text="Ini adalah deskripsi Ini adalah deskripsi Ini adalah deskripsi"/>
+                    android:lineSpacingExtra="4dp"/>
 
                 <LinearLayout
                     style="@style/QuickTooltips.Linear.Horizontal"
@@ -45,13 +44,13 @@
                     android:layout_marginBottom="15dp">
 
                     <TextView
-                        android:id="@+id/act_quick_tooltips_btnLearnMore"
+                        android:id="@+id/act_quick_tooltips_btnSecondary"
                         style="@style/QuickTooltips.Button"
                         android:text="Learn More"
-                        android:layout_marginEnd="15dp"/>
+                        android:layout_marginEnd="@dimen/quick_tooltips_safe_area"/>
 
                     <TextView
-                        android:id="@+id/act_quick_tooltips_btnGotIt"
+                        android:id="@+id/act_quick_tooltips_btnPrimary"
                         style="@style/QuickTooltips.Button"
                         android:text="Got it" />
 
@@ -60,6 +59,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/act_quick_tooltips_btnClose"
                 style="@style/QuickTooltips"
                 android:padding="@dimen/quick_tooltips_button_space_vertical"
                 android:layout_gravity="top|end"
@@ -87,7 +87,6 @@
         tools:ignore="ContentDescription"
         android:layout_marginStart="100dp"
         android:elevation="@dimen/quick_tooltips_card_elevation"
-        android:alpha="0"
         android:layout_marginTop="@dimen/quick_tooltips_icon_triangle_margin" />
 
 </com.erif.quicktooltips.QuickTooltipsTargetLayout>

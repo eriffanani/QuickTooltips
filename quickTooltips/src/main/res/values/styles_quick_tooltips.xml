@@ -8,6 +8,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="QuickTooltips">
@@ -19,6 +20,7 @@
         <item name="android:layout_width">@dimen/quick_tooltips_card_width</item>
         <item name="cardCornerRadius">@dimen/quick_tooltips_card_corner</item>
         <item name="cardElevation">@dimen/quick_tooltips_card_elevation</item>
+        <item name="useCompatPadding">true</item>
     </style>
 
     <style name="QuickTooltips.Linear" parent="QuickTooltips">
@@ -42,6 +44,7 @@
     <style name="QuickTooltips.Text.Title" parent="QuickTooltips.Text">
         <item name="android:textSize">@dimen/quick_tooltips_text_title</item>
         <item name="android:textColor">@color/color_quick_tooltips_title</item>
+        <item name="android:layout_marginTop">@dimen/quick_tooltips_safe_area_large</item>
     </style>
 
     <style name="QuickTooltips.Button" parent="QuickTooltips">
@@ -50,9 +53,11 @@
         <item name="android:paddingEnd">@dimen/quick_tooltips_button_space_side</item>
         <item name="android:paddingTop">@dimen/quick_tooltips_button_space_vertical</item>
         <item name="android:paddingBottom">@dimen/quick_tooltips_button_space_vertical</item>
-        <item name="android:textSize">@dimen/quick_tooltips_button_text_size</item>
+        <item name="android:textSize">@dimen/quick_tooltips_text</item>
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:textColor">@color/color_quick_tooltips_button</item>
+        <item name="android:minWidth">@dimen/quick_tooltips_button_min_width</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

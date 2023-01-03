@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="o">
+
+    <!--Regular-->
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/rubik_regular"/>
+    <!--Regular Medium-->
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="500"
+        android:font="@font/rubik_medium"/>
+    <!--Regular Semi Bold-->
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="600"
+        android:font="@font/rubik_semi_bold"/>
+    <!--Regular Bold-->
+    <!--<font
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/rubik_bold"/>-->
+
+    <!--Italic Regular-->
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/rubik_italic"/>
+    <!--Italic Medium-->
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="500"
+        android:font="@font/rubik_medium_italic"/>
+    <!--Italic Semi Bold-->
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="600"
+        android:font="@font/rubik_semi_bold_italic"/>
+    <!--Italic Bold-->
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="700"
+        android:font="@font/rubik_bold_italic"/>
+
+</font-family>

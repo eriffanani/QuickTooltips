@@ -5,6 +5,7 @@
     <dimen name="quick_tooltips_corner">10dp</dimen>
 
     <dimen name="quick_tooltips_safe_area">12dp</dimen>
+    <dimen name="quick_tooltips_safe_area_large">15dp</dimen>
 
     <dimen name="quick_tooltips_text">13sp</dimen>
     <dimen name="quick_tooltips_text_title">17sp</dimen>
@@ -13,9 +14,9 @@
     <dimen name="quick_tooltips_card_corner">15dp</dimen>
     <dimen name="quick_tooltips_card_elevation">2dp</dimen>
 
+    <dimen name="quick_tooltips_button_min_width">60dp</dimen>
     <dimen name="quick_tooltips_button_space_side">8dp</dimen>
-    <dimen name="quick_tooltips_button_space_vertical">5dp</dimen>
-    <dimen name="quick_tooltips_button_text_size">12sp</dimen>
+    <dimen name="quick_tooltips_button_space_vertical">6dp</dimen>
 
     <dimen name="quick_tooltips_icon_close_size">16dp</dimen>
     <dimen name="quick_tooltips_icon_triangle_size">18dp</dimen>
